@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Sky Battles</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Choose your Windows version to download</h1>
+        <div class="button-group">
+            <a href="Sky Battles Setup.msi" class="download-btn windows10">Download for Windows 10</a>
+            <a href="Sky Battles Setup.msi" class="download-btn windows11">Download for Windows 11</a>
+        </div>
+    </div>
+</body>
+</html>
