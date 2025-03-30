@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://download.playfab.com/PlayFabClientApi.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Login</h2>
+        <label for="login-username">Username</label>
+        <input type="text" id="login-username" placeholder="Enter username">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" placeholder="Enter password">
+        <label>
+            <input type="checkbox" id="remember-me"> Remember Me
+        </label>
+        <button onclick="login()">Login</button>
+        <p id="login-message"></p>
+        <a href="register.html">Create an account</a>
+        <a href="settings.html">Settings</a>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
