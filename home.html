@@ -3,50 +3,361 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Windows</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>MARION Games Launcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
         }
-        .container {
-            text-align: center;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .main-content { background-color: #181818; }
+        .sidebar { background-color: #000000; }
+        .game-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            background-color: #2a2a2a;
         }
-        .buttons {
-            margin-top: 20px;
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
         .btn {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: white;
-            border-radius: 5px;
+            transition: background-color 0.2s;
         }
-        .windows10 {
-            background-color: #0078d7;
-        }
-        .windows11 {
-            background-color: #0042a5;
+        .btn-primary { background-color: #0078f2; }
+        .btn-primary:hover { background-color: #0056b3; }
+        .btn-success { background-color: #1DB954; }
+        .btn-success:hover { background-color: #179443; }
+        .modal-backdrop { background-color: rgba(0, 0, 0, 0.7); }
+        .auth-page {
+            background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 1)), url('https://placehold.co/1920x1080/000000/FFFFFF?text=MARION+GAMES') no-repeat center center / cover;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Choose Your Windows Version</h1>
-        <div class="buttons">
-            <a href="https://www.microsoft.com/en-us/software-download/windows10" class="btn windows10">Download Windows 10</a>
-            <a href="https://www.microsoft.com/en-us/software-download/windows11" class="btn windows11">Download Windows 11</a>
+<body class="overflow-hidden">
+
+    <!-- Login Page -->
+    <div id="login-page" class="hidden h-screen w-screen flex items-center justify-center auth-page">
+        <div class="bg-gray-900 bg-opacity-80 p-10 rounded-lg shadow-2xl w-full max-w-sm">
+            <h2 class="text-3xl font-bold text-center text-white mb-8">Welcome Back</h2>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="login-email" class="block text-gray-300 mb-2">Email</label>
+                    <input type="email" id="login-email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="login-password" class="block text-gray-300 mb-2">Password</label>
+                    <input type="password" id="login-password" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-full text-white font-bold py-2 px-4 rounded-lg">Log In</button>
+            </form>
+            <p class="text-center text-gray-400 mt-6">
+                Don't have an account? <a href="#" id="show-register" class="text-blue-400 hover:underline">Register here</a>
+            </p>
         </div>
     </div>
+
+    <!-- Register Page -->
+    <div id="register-page" class="hidden h-screen w-screen flex items-center justify-center auth-page">
+        <div class="bg-gray-900 bg-opacity-80 p-10 rounded-lg shadow-2xl w-full max-w-sm">
+            <h2 class="text-3xl font-bold text-center text-white mb-8">Create Account</h2>
+            <form id="register-form">
+                <div class="mb-4">
+                    <label for="register-username" class="block text-gray-300 mb-2">Username</label>
+                    <input type="text" id="register-username" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-4">
+                    <label for="register-email" class="block text-gray-300 mb-2">Email</label>
+                    <input type="email" id="register-email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="register-password" class="block text-gray-300 mb-2">Password</label>
+                    <input type="password" id="register-password" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-full text-white font-bold py-2 px-4 rounded-lg">Register</button>
+            </form>
+            <p class="text-center text-gray-400 mt-6">
+                Already have an account? <a href="#" id="show-login" class="text-blue-400 hover:underline">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Main App (Home Page) -->
+    <div id="app" class="hidden flex h-screen">
+        <aside class="sidebar w-64 flex-shrink-0 p-6 flex flex-col justify-between">
+            <div>
+                <div class="flex items-center mb-10">
+                    <i class="fas fa-atom fa-2x text-blue-500 mr-3"></i>
+                    <h1 class="text-2xl font-bold text-white">MARION Games</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="mb-4"><a href="#" class="flex items-center p-2 rounded-lg bg-gray-700 text-white"><i class="fas fa-gamepad w-6 mr-3"></i> Library</a></li>
+                        <li class="mb-4"><a href="#" class="flex items-center p-2 rounded-lg hover:bg-gray-700"><i class="fas fa-store w-6 mr-3"></i> Store</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="auth-container">
+                <!-- Auth content will be injected here -->
+            </div>
+        </aside>
+
+        <main class="main-content flex-1 p-8 overflow-y-auto">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold">My Game Library</h2>
+                <button id="add-game-btn" class="btn btn-success text-white font-bold py-2 px-4 rounded-lg flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Add Game
+                </button>
+            </div>
+            <div id="loading-indicator" class="text-center p-10"><i class="fas fa-spinner fa-spin fa-3x"></i><p class="mt-4">Loading Games...</p></div>
+            <div id="game-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"></div>
+            <div id="empty-state" class="hidden text-center p-10 border-2 border-dashed border-gray-600 rounded-lg mt-8">
+                <i class="fas fa-ghost fa-4x text-gray-500"></i>
+                <h3 class="mt-4 text-xl font-semibold">Your library is empty.</h3>
+                <p class="text-gray-400">Click "Add Game" to get started.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Game Modal -->
+    <div id="add-game-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop">
+        <div class="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
+            <h3 class="text-2xl font-bold mb-6">Add a New Game</h3>
+            <form id="add-game-form">
+                <div class="mb-4"><label for="game-title" class="block text-sm font-medium mb-2">Game Title</label><input type="text" id="game-title" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required></div>
+                <div class="mb-6"><label for="game-image" class="block text-sm font-medium mb-2">Image URL</label><input type="url" id="game-image" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required></div>
+                <div class="flex justify-end gap-4"><button type="button" id="cancel-add-game" class="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg">Cancel</button><button type="submit" class="btn btn-primary text-white font-bold py-2 px-4 rounded-lg">Add Game</button></div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="hidden fixed bottom-5 right-5 bg-green-500 text-white py-2 px-5 rounded-lg shadow-lg z-50 transition-opacity duration-300"><p id="toast-message"></p></div>
+
+    <script type="module">
+        // Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
+        import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+        import { getFirestore, collection, onSnapshot, addDoc, doc, deleteDoc, setDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+        // --- CONFIGURATION ---
+        // This configuration is meant to be public. Security is handled by Firestore Security Rules.
+        const firebaseConfig = {
+            apiKey: "AIzaSyBDiwVljf9nfgqC07kBMlUzXRa6c9wMl4Y",
+            authDomain: "mariongames.firebaseapp.com",
+            databaseURL: "https://mariongames-default-rtdb.firebaseio.com",
+            projectId: "mariongames",
+            storageBucket: "mariongames.appspot.com",
+            messagingSenderId: "958247483617",
+            appId: "1:958247483617:web:60198c99ffb8a120a01fa0",
+            measurementId: "G-NN88RMVH13"
+        };
+        
+        // --- FIREBASE INITIALIZATION ---
+        let app, auth, db, userId, userEmail;
+        let unsubscribeFromGames = null;
+        
+        // --- UI ELEMENTS ---
+        const loginPage = document.getElementById('login-page');
+        const registerPage = document.getElementById('register-page');
+        const mainApp = document.getElementById('app');
+        const gameList = document.getElementById('game-list');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const emptyState = document.getElementById('empty-state');
+        const authContainer = document.getElementById('auth-container');
+        const modal = document.getElementById('add-game-modal');
+        
+        // --- HELPER: TOAST NOTIFICATION ---
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+            toast.className = `fixed bottom-5 right-5 text-white py-2 px-5 rounded-lg shadow-lg z-50 transition-opacity duration-300 ${isError ? 'bg-red-500' : 'bg-green-500'}`;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+
+        // --- PAGE NAVIGATION LOGIC ---
+        function showPage(page) {
+            loginPage.classList.add('hidden');
+            registerPage.classList.add('hidden');
+            mainApp.classList.add('hidden');
+            page.classList.remove('hidden');
+        }
+
+        document.getElementById('show-register').addEventListener('click', (e) => { e.preventDefault(); showPage(registerPage); });
+        document.getElementById('show-login').addEventListener('click', (e) => { e.preventDefault(); showPage(loginPage); });
+
+        // --- AUTHENTICATION ---
+        function setupAuthUI(user) {
+            if (user) {
+                authContainer.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas fa-user-circle fa-2x text-gray-400 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-sm truncate w-40" title="${user.email}">${user.email}</p>
+                            <a href="#" id="logout-btn" class="text-xs text-red-400 hover:underline">Log Out</a>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('logout-btn').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    signOut(auth);
+                });
+            } else {
+                authContainer.innerHTML = '';
+            }
+        }
+
+        // --- GAME RENDERING & FIRESTORE ---
+        function renderGames(games) {
+            loadingIndicator.style.display = 'none';
+            emptyState.classList.toggle('hidden', games.length > 0);
+            gameList.innerHTML = games.map(game => `
+                <div class="game-card rounded-lg overflow-hidden shadow-lg" data-id="${game.id}">
+                    <img src="${game.imageUrl}" alt="${game.title}" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2a2a2a/E0E0E0?text=No+Image';">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg truncate">${game.title}</h3>
+                        <div class="flex justify-between items-center mt-4">
+                            <button class="btn btn-primary text-white font-bold py-2 px-4 rounded-lg text-sm w-full launch-btn"><i class="fas fa-play mr-2"></i>LAUNCH</button>
+                            <button class="delete-game-btn text-gray-400 hover:text-red-500 ml-3" data-id="${game.id}"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>`).join('');
+        }
+        
+        function setupGameSubscription() {
+            if (unsubscribeFromGames) unsubscribeFromGames();
+            if (!db || !userId) return;
+            
+            // NEW: Point to the user's private game collection
+            const gamesCollectionRef = collection(db, `users/${userId}/games`);
+
+            unsubscribeFromGames = onSnapshot(gamesCollectionRef, (snapshot) => {
+                const games = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderGames(games);
+            }, (error) => {
+                console.error("Error fetching user games: ", error);
+                showToast("Error fetching your games.", true);
+                loadingIndicator.style.display = 'none';
+            });
+        }
+
+        // --- EVENT LISTENERS ---
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                showToast("Logged in successfully!");
+            } catch (error) {
+                showToast(error.message, true);
+            }
+        });
+
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            try {
+                // 1. Create user in Firebase Auth
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // 2. Create user profile document in Firestore
+                const userDocRef = doc(db, "users", user.uid);
+                await setDoc(userDocRef, {
+                    username: username,
+                    email: user.email,
+                    createdAt: new Date()
+                });
+
+                showToast("Registered successfully! You are now logged in.");
+            } catch (error) {
+                showToast(error.message, true);
+            }
+        });
+
+        // Modal Logic
+        document.getElementById('add-game-btn').addEventListener('click', () => modal.classList.remove('hidden'));
+        document.getElementById('cancel-add-game').addEventListener('click', () => modal.classList.add('hidden'));
+        
+        document.getElementById('add-game-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('game-title').value;
+            const imageUrl = document.getElementById('game-image').value;
+            if (!db || !userId) return showToast("You must be logged in to add games.", true);
+            try {
+                // NEW: Add game to the current user's private collection
+                await addDoc(collection(db, `users/${userId}/games`), { title, imageUrl });
+                showToast("Game added successfully!");
+                document.getElementById('add-game-form').reset();
+                modal.classList.add('hidden');
+            } catch (error) {
+                console.error("Error adding game: ", error);
+                showToast("Failed to add game.", true);
+            }
+        });
+
+        gameList.addEventListener('click', async (e) => {
+            const deleteBtn = e.target.closest('.delete-game-btn');
+            const launchBtn = e.target.closest('.launch-btn');
+            if (deleteBtn) {
+                const gameId = deleteBtn.dataset.id;
+                if (!userId) return showToast("Not logged in.", true);
+                
+                if (confirm('Are you sure you want to delete this game?')) {
+                    try {
+                        // NEW: Delete game from the current user's private collection
+                        await deleteDoc(doc(db, `users/${userId}/games`, gameId));
+                        showToast('Game deleted.');
+                    } catch (error) {
+                        showToast('Failed to delete game.', true);
+                    }
+                }
+            } else if (launchBtn) {
+                 const title = launchBtn.closest('.game-card').querySelector('h3').textContent;
+                 showToast(`Launching ${title}... (simulation)`);
+            }
+        });
+
+        // --- MAIN INITIALIZATION ---
+        function initialize() {
+            try {
+                app = initializeApp(firebaseConfig);
+                getAnalytics(app);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                setLogLevel('debug');
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        userEmail = user.email;
+                        showPage(mainApp);
+                        setupAuthUI(user);
+                        setupGameSubscription();
+                    } else {
+                        userId = null;
+                        userEmail = null;
+                        if (unsubscribeFromGames) unsubscribeFromGames();
+                        renderGames([]); // Clear games list
+                        showPage(loginPage);
+                        setupAuthUI(null);
+                    }
+                });
+            } catch (error) {
+                console.error("Initialization failed:", error);
+                document.body.innerHTML = `<div class="text-red-500 text-center p-8">Application failed to initialize. Check console for errors.</div>`;
+            }
+        }
+
+        initialize();
+    </script>
 </body>
 </html>
