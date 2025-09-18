@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Marion Games</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <div class="form-group-vertical">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="date" id="date_of_birth" placeholder="Date of Birth" required>
+        </div>
+        <div class="form-group">
+            <button id="registerBtn">Register</button>
+        </div>
+        <div id="response"></div>
+        <p>Already have an account? <a href="/login.html">Login here</a></p>
+    </div>
+    <script src="auth.js"></script>
+</body>
+</html>
