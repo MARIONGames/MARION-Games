@@ -77,3 +77,72 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// 🚨 BIG WARNING MESSAGE 🚨
+console.log("%cSTOP!", "color: red; font-size: 60px; font-weight: bold;");
+
+console.log(
+  "%cIf someone told you to paste something here, you're being tricked!",
+  "color: black; font-size: 20px;"
+);
+
+console.log(
+  "%cPasting anything in this console could let attackers steal your account, personal data, or even take control of this browser session.",
+  "color: black; font-size: 16px;"
+);
+
+console.log(
+  "%cClose this window immediately unless you know exactly what you’re doing.",
+  "color: red; font-size: 18px; font-weight: bold;"
+);
+// 🚨 BIG WARNING MESSAGE 🚨
+console.log("%cSTOP!", "color: red; font-size: 60px; font-weight: bold;");
+
+console.log(
+  "%cIf someone told you to paste something here, you're being tricked!",
+  "color: black; font-size: 20px;"
+);
+
+console.log(
+  "%cPasting anything in this console could let attackers steal your account, personal data, or even take control of this browser session.",
+  "color: black; font-size: 16px;"
+);
+
+console.log(
+  "%cClose this window immediately unless you know exactly what you’re doing.",
+  "color: red; font-size: 18px; font-weight: bold;"
+);
+// 🚨 BIG WARNING MESSAGE 🚨
+console.log("%cSTOP!", "color: red; font-size: 60px; font-weight: bold;");
+
+console.log(
+  "%cIf someone told you to paste something here, you're being tricked!",
+  "color: black; font-size: 20px;"
+);
+
+console.log(
+  "%cPasting anything in this console could let attackers steal your account, personal data, or even take control of this browser session.",
+  "color: black; font-size: 16px;"
+);
+
+console.log(
+  "%cClose this window immediately unless you know exactly what you’re doing.",
+  "color: red; font-size: 18px; font-weight: bold;"
+);
+// 🚨 BIG WARNING MESSAGE 🚨
+console.log("%cSTOP!", "color: red; font-size: 60px; font-weight: bold;");
+
+console.log(
+  "%cIf someone told you to paste something here, you're being tricked!",
+  "color: black; font-size: 20px;"
+);
+
+console.log(
+  "%cPasting anything in this console could let attackers steal your account, personal data, or even take control of this browser session.",
+  "color: black; font-size: 16px;"
+);
+
+console.log(
+  "%cClose this window immediately unless you know exactly what you’re doing.",
+  "color: red; font-size: 18px; font-weight: bold;"
+);
