@@ -142,4 +142,8 @@ console.log(
   "%cClose this window immediately unless you know exactly what you’re doing.",
   "color: red; font-size: 18px; font-weight: bold;"
 );
+console.log(
+  "%c🚨🚨🚨 NEVER PASTE STRANGE CODE HERE 🚨🚨🚨",
+  "color: white; font-size: 26px; font-weight: bold; background: linear-gradient(to right, red, orange, yellow, green, blue, purple); padding: 6px;"
+);
 // secrete comment : sussy backa
